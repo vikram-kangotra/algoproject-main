@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepPRMS - Prediction Results</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-container {
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        h3 {
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        footer {
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 1rem 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-content {
+            font-size: 0.8rem;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        footer {
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            width: 98%;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">DeepPRMS</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../dataset.html">Dataset</a></li>
+            <li><a href="../help.html">Help</a></li>
+            <li><a href="../contact.html">Contact Us</a></li>
+        </ul>
+        <div class="burger" onclick="toggleNav()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+    <div class="header-container">
+        <div class="header-text" style="color: #007BFF;">DeepPRMS - Prediction Results</div>
+    </div>
+    <div class="content">
+        <h3>Prediction Results</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>SeqId</th>
+                    <th>R site</th>
+                    <th>Peptides</th>
+                    <th>Prediction Score</th>
+                </tr>
+            </thead>
+            <tbody id="predictionTableBody"></tbody>
+        </table>
+        <button id="downloadButton">Download CSV</button>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>National Institute of Technology Srinagar</p>
+            <p>&copy; 2023 NIT Srinagar, J&K India. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // const queryString = window.location.search;
+        // const urlParams = new URLSearchParams(queryString);
+        // const results = urlParams.get('results');
+        // const predictionResults = JSON.parse(decodeURIComponent(results));
+
+        // const predictionTableBody = document.getElementById('predictionTableBody');
+        // predictionTableBody.innerHTML = '';
+        // predictionResults.forEach((result) => {
+        //     const row = document.createElement('tr');
+        //     const seqIdCell = document.createElement('td');
+        //     seqIdCell.textContent = result['SeqId'];
+        //     const rSiteCell = document.createElement('td');
+        //     rSiteCell.textContent = result['R site'];
+        //     const peptideCell = document.createElement('td');
+        //     peptideCell.textContent = result['Peptides'];
+        //     const predictionScoreCell = document.createElement('td');
+        //     predictionScoreCell.textContent = result['Prediction Score'];
+
+        //     row.appendChild(seqIdCell);
+        //     row.appendChild(rSiteCell);
+        //     row.appendChild(peptideCell);
+        //     row.appendChild(predictionScoreCell);
+        //     predictionTableBody.appendChild(row);
+        // });
+        // function downloadCSV() {
+        //     const rows = Array.from(document.querySelectorAll('#predictionTableBody tr'));
+        //     const headers = Array.from(rows.shift().querySelectorAll('th, td'));
+
+        //     const csvContent = headers.map(cell => cell.textContent).join(',') + '\n';
+        //     const dataRows = rows.map(row =>
+        //         Array.from(row.querySelectorAll('td')).map(cell => cell.textContent).join(',')
+        //     );
+
+        //     const csvData = csvContent + dataRows.join('\n');
+
+        //     const blob = new Blob([csvData], { type: 'text/csv' });
+        //     const url = URL.createObjectURL(blob);
+
+        //     const a = document.createElement('a');
+        //     a.href = url;
+        //     a.download = 'prediction_results.csv';
+        //     document.body.appendChild(a);
+        //     a.click();
+        //     document.body.removeChild(a);
+        //     URL.revokeObjectURL(url);
+        // }
+
+        // const downloadButton = document.getElementById('downloadButton');
+        // downloadButton.addEventListener('click', downloadCSV);
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const results = urlParams.get('results');
+        const predictionResults = JSON.parse(decodeURIComponent(results));
+
+        const predictionTableBody = document.getElementById('predictionTableBody');
+        const downloadButton = document.getElementById('downloadButton');
+
+        function clearTable() {
+            predictionTableBody.innerHTML = ''; // Clear the existing table content
+        }
+
+        function populateTable() {
+            predictionResults.forEach((result) => {
+                const row = document.createElement('tr');
+                const seqIdCell = document.createElement('td');
+                seqIdCell.textContent = result['SeqId'];
+                const rSiteCell = document.createElement('td');
+                rSiteCell.textContent = result['R site'];
+                const peptideCell = document.createElement('td');
+                peptideCell.textContent = result['Peptide'];
+                const predictionScoreCell = document.createElement('td');
+
+                // Get the latest prediction score from the result
+                const latestPredictionScore = result['Prediction Score'][0][0];
+                predictionScoreCell.textContent = latestPredictionScore.toFixed(6);
+
+                row.appendChild(seqIdCell);
+                row.appendChild(rSiteCell);
+                row.appendChild(peptideCell);
+                row.appendChild(predictionScoreCell);
+                predictionTableBody.appendChild(row);
+            });
+        }
+
+        function downloadCSV() {
+            const rows = Array.from(document.querySelectorAll('#predictionTableBody tr'));
+            const headers = Array.from(rows.shift().querySelectorAll('th, td'));
+
+            const csvContent = headers.map(cell => cell.textContent).join(',') + '\n';
+            const dataRows = rows.map(row =>
+                Array.from(row.querySelectorAll('td')).map(cell => cell.textContent).join(',')
+            );
+
+            const csvData = csvContent + dataRows.join('\n');
+
+            const blob = new Blob([csvData], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'prediction_results.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        clearTable(); // Clear the existing table content
+        populateTable(); // Populate the table with new results
+
+        downloadButton.addEventListener('click', downloadCSV);
+    </script>
+</body>
+
+</html>

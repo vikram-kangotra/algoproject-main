@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #f8c947;
+        }
+
+        .burger {
+            display: none;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .tips-section h2,
+        .dataset-section h2,
+        .supplementary-section h2 {
+            margin-top: 0;
+        }
+
+        .tips-section ol,
+        .dataset-section p,
+        .supplementary-section p {
+            margin: 10px 0;
+        }
+
+        .tips-section li {
+            list-style: decimal;
+            padding-left: 20px;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            width: 98%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Adjustments for smaller screens */
+        @media screen and (max-width: 600px) {
+            .footer-content {
+                font-size: 14px;
+            }
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            width: 98%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Adjustments for smaller screens */
+        @media screen and (max-width: 600px) {
+            .footer-content {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: #007BFF;
+                position: absolute;
+                top: 65px;
+                left: 0;
+                width: 100%;
+                padding: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                border-radius: 5px;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .nav-links li a {
+                color: #fff;
+                font-size: 18px;
+            }
+
+            .burger {
+                display: block;
+                cursor: pointer;
+            }
+
+            .burger div {
+                width: 25px;
+                height: 3px;
+                background-color: #fff;
+                margin: 5px;
+                transition: all 0.3s ease;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-brand">PRmePRed</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="./templates/index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="dataset.html">Dataset</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="burger" onclick="toggleNav()">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+    <div class="content">
+        <h1>Tips</h1>
+        <div class="tips-section">
+            <h2>Tips for using PRmePRed</h2>
+            <ol>
+                <li>Protein sequence input length should not be less than 50 amino acids.</li>
+                <li>When searching for proteins in raw or FASTA format, use the single-letter amino acid code.</li>
+                <li>Please ensure that the sequences are in FASTA format before performing prediction on a file with
+                    multiple sequences.</li>
+            </ol>
+            <p>
+                Supplementary Information:<a href="dow.doc" download>Download</a>
+            </p>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>National Institute of Technology Srinagar</p>
+            <p>&copy; 2023 NIT Srinagar,J&K India.All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+
+    /* Header Styles */
+    header {
+        background-color: #007BFF;
+        color: #fff;
+        padding: 10px;
+    }
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .navbar-brand {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+    }
+
+    .nav-links li {
+        margin-right: 20px;
+    }
+
+    .nav-links li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+        transition: color 0.3s;
+    }
+
+    .nav-links li a:hover {
+        color: #f8c947;
+    }
+
+    .burger {
+        display: none;
+    }
+    footer {
+        background-color: #007BFF;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+        width: 98%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Adjustments for smaller screens */
+    @media screen and (max-width: 600px) {
+        .footer-content {
+            font-size: 14px;
+        }
+    }
+
+    footer {
+        background-color: #007BFF;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+        width: 98%;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Adjustments for smaller screens */
+    @media screen and (max-width: 600px) {
+        .footer-content {
+            font-size: 14px;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            background-color: #007BFF;
+            position: absolute;
+            top: 65px;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        .nav-links li {
+            margin: 10px 0;
+        }
+
+        .nav-links li a {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .burger {
+            display: block;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+    }
+
+    .contact-info {
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        text-align: left;
+        color: #333;
+    }
+    .content h1 {
+            font-size: 28px;
+            color: #007BFF;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+    .contact-info h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #007BFF;
+    }
+
+    .contact-info p {
+        margin: 5px 0;
+    }
+
+    .contact-info strong {
+        font-weight: bold;
+        margin-right: 10px;
+    }
+</style>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-brand">PRmePRed</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="./templates/index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="help.html">Help</a> </li>
+                <li><a href="dataset.html">Dataset</a></li>
+            </ul>
+            <div class="burger" onclick="toggleNav()">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+    <div class="content">
+        <h1>Contact Us</h1>
+        <div class="contact-info">
+            <h2>Dr. Ranjeet Kumar Rout</h2>
+            <p><strong>Designation:</strong> Assistant Professor</p>
+            <p><strong>Department:</strong> CSE Department</p>
+            <p><strong>Institution:</strong> NIT Srinagar, Hazratbal</p>
+            <p><strong>Address:</strong> NIT Srinagar 190006 Jammu and Kashmir, India</p>
+            <p><strong>Email:</strong> ranjeetkumarrout@nitsri.ac.in</p>
+        </div>
+        <div class="contact-info">
+            <h2>Monika Khandelwal</h2>
+            <p><strong>Designation:</strong> Research Scholar</p>
+            <p><strong>Department:</strong> CSE Department</p>
+            <p><strong>Institution:</strong> NIT Srinagar, Hazratbal</p>
+            <p><strong>Address:</strong> Jammu & Kashmir-190006</p>
+            <p><strong>Email:</strong> monika_01phd21@nitsri.ac.in</p>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>National Institute of Technology Srinagar</p>
+            <p>&copy; 2023 NIT Srinagar,J&K India.All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepPRMS</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">DeepPRMS
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="dataset.html">Dataset</a></li>
+            <li><a href="help.html">Help</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="burger" onclick="toggleNav()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+    <!-- <img src="proarg.png" alt="Your Image" width="100%" height="200px"> -->
+    <div class="header-container">
+        <div class="header-text">DeepPRMS</div>
+        <div class="header-subtext">Advanced deep learning model to predict protein arginine methylation sites</div>
+    </div>
+    <div class="content">
+        <p>Paste or upload your protein sequences (up to 25) in FASTA format.</p>
+        <p>The maximum limit for file upload is 2 Mb.</p>
+        <p><a href="tips.html">Tips</a>
+        <ul>
+            <li><button onclick="loadDemoSequences()">Load demo sequences</button></li>
+            <li><button onclick="clearSequences()">Clear sequences</button></li>
+            <li>(OR) Upload sequence(s) file in FASTA format: (up to 2 Mb)</li>
+        </ul>
+        <textarea id="proteinSequences" rows="10" cols="50"></textarea>
+        <label for="fastaFile">Select File:</label>
+        <input type="file" id="fastaFile" accept=".fasta" onchange="handleFileSelect(event)">
+        <label for="thresholdSelect">Select Threshold:</label>
+        <input type="checkbox" id="enableThreshold" onchange="toggleThreshold()">
+        <input type="number" id="thresholdSelect" step="0.01" min="0" max="1" value="0.5" disabled>
+        <button onclick="runPrediction()">Run Prediction</button>
+        <button onclick="resetForm()">Reset</button>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>National Institute of Technology Srinagar</p>
+            <p>&copy; 2023 NIT Srinagar,J&K India.All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="index.js"></script>
+    <script>
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const fileContent = e.target.result;
+                    document.getElementById("proteinSequences").value = fileContent;
+                };
+                reader.readAsText(file);
+            }
+        }
+        function toggleThreshold() {
+            const thresholdInput = document.getElementById("thresholdSelect");
+            const enableThreshold = document.getElementById("enableThreshold").checked;
+            thresholdInput.disabled = !enableThreshold;
+            if (enableThreshold) {
+                thresholdInput.value = "0.5";
+            } else {
+                thresholdInput.value = "";
+            }
+        }
+        function loadDemoSequences() {
+            const demoSequences = `>Q92997
+MGETKIIYHLDGQETPYLVKLPLPAERVTLADFKGVLQRPSYKFFFKSMDDDFGVVKEEISDDNA
+KLPCFNGRVVSWLVSAEGSHPDPAPFCADNPSELPPPMERTGGIGDSRPPSFHPHAGGGSQENLD
+NDTETDSLVSAQRERPRRRDGPEHATRLNGTAKGERRREPGGYDSSSTLMSSELETTSFFDSDED
+DSTSRFSSSTEQSSASRLMRRHKRRRRKQKVSRIERSSSFSSITDSTMSLNIITVTLNMEKYNFL
+GISIVGQSNERGDGGIYIGSIMKGGAVAADGRIEPGDMLLQVNEINFENMSNDDAVRVLREIVHK
+PGPITLTVAKCWDPSPRGCFTLPRSEPIRPIDPAAWVSHTAAMTGTFPAYGMSPSLSTITSTSSS
+ITSSIPDTERLDDFHLSIHSDMAAIVKAMASPESGLEVRDRMWLKITIPNAFIGSDVVDWLYHNV
+EGFTDRREARKYASNLLKAGFIRHTVNKITFSEQCYYIFGDLCGNMANLSLHDHDGSSGASDQDT
+LAPLPHPGAAPWPMAFPYQYPPPPHPYNPHPGFPELGYSYGGGSASSQHSEGSRSSGSNRSGSDR
+RKEKDPKAGDSKSGGSGSESDHTTRSSLRGPRERAPSERSGPAASEHSHRSHHSLASSLRSHHTH
+PSYGPPGVPPLYGPPMLMMPPPPAAMGPPGAPPGRDLASVPPELTASRQSFRMAMGNPSEFFVDVM`;
+
+            document.getElementById("proteinSequences").value = demoSequences;
+        }
+
+        function clearSequences() {
+            document.getElementById("proteinSequences").value = "";
+        }
+        function runPrediction() {
+            event.preventDefault();
+            const proteinSequences = document.getElementById("proteinSequences").value;
+            const threshold = document.getElementById("thresholdSelect").value;
+            const enableThreshold = document.getElementById("enableThreshold").checked;
+
+            const data = {
+                protein_sequence: proteinSequences,
+                threshold: parseFloat(threshold),
+                enableThreshold: enableThreshold
+            };
+
+            console.log("Data to send:", data);
+            //https://fazeel-jaffer.github.io/predict
+            //http://127.0.0.1:5000/predict
+            // Make an API call to the backend using fetch
+            fetch('http://127.0.0.1:5000/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Response Data:", data);
+                    // Redirect to the prediction_results.html page with the prediction results as a URL parameter
+                    const predictionResults = encodeURIComponent(JSON.stringify(data));
+                    window.location.href = `prediction_results.html?results=${predictionResults}`;
+                })
+                .catch(error => {
+                    console.error("Error:", error.message);
+                });
+        }
+
+
+        function resetForm() {
+            document.getElementById("proteinSequences").value = "";
+            document.getElementById("thresholdSelect").value = "0.5";
+            document.getElementById("fastaFile").value = "";
+        }
+    </script>
+</body>
+
+</html>

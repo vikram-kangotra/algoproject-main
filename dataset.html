@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataset Information</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #f8c947;
+        }
+
+        .burger {
+            display: none;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .dataset-info p {
+            margin: 10px 0;
+        }
+
+        .dataset-info table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .dataset-info th,
+        .dataset-info td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .dataset-info th {
+            background-color: #f2f2f2;
+        }
+
+        .dataset-info h2 {
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            width: 98%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Adjustments for smaller screens */
+        @media screen and (max-width: 600px) {
+            .footer-content {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: #007BFF;
+                position: absolute;
+                top: 65px;
+                left: 0;
+                width: 100%;
+                padding: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                border-radius: 5px;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .nav-links li a {
+                color: #fff;
+                font-size: 18px;
+            }
+
+            .burger {
+                display: block;
+                cursor: pointer;
+            }
+
+            .burger div {
+                width: 25px;
+                height: 3px;
+                background-color: #fff;
+                margin: 5px;
+                transition: all 0.3s ease;
+            }
+        }
+
+        .table-section {
+            margin-top: 20px;
+        }
+
+        .table-section h2 {
+            margin-top: 20px;
+        }
+
+        .table-section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table-section th,
+        .table-section td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .table-section th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-brand">PRmePRed</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="./templates/index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="help.html">Help</a> </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="burger" onclick="toggleNav()">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+    <div class="content">
+        <h1>Dataset Information</h1>
+        <div class="dataset-info">
+            <p>
+                We collected experimentally verified arginine methylation sites from the UniProt database (release
+                2023_01) [1]. We searched the database using keywords like "methylarginine", "dimethylarginine",
+                "methylation", and "arginine". We considered experimentally reviewed in vivo methylated sites only after
+                scrutiny. We did not include methylated sites reported in vitro, which lack significant in vivo
+                evidence. We excluded proteins having ambiguities, including unusual amino acids, obsolete protein
+                entries, extremely short protein fragments (less than 50 amino acids), and site mismatches.
+            </p>
+
+            <p>
+                Potential methylation sites containing the terms "Probable", "Potential", or "By similarity" were
+                eliminated from the data set. After removing duplicate sequences, the data set consists of 937 proteins
+                covering 1925 arginine methylated protein sequences to create the positive samples. The negative samples
+                were obtained from arginines not marked as methylated from the same proteins from which positive samples
+                were selected. The data set comprises 46651 non-methylated arginine sites to form the negative samples.
+                There is a huge imbalance between negative and positive samples; the prediction will be biased towards
+                the negative samples.
+            </p>
+
+            <p>
+                We followed the conventional practice of generating a negative set from those sites which are not
+                reported to be methylated in the methylated proteins.
+                Briefly, we first created an unlabeled class of all the arginine sites which were not reported to be
+                methylated from the respective methylated proteins.
+                We termed the set as unlabeled because they may contain potential sites which could be methylated but
+                have not been established yet.
+                Using CD-HIT-2d[4] with a 40% identity cut off, we created a negative set from this unlabeled set by
+                removing sequences which were similar to the positive set.
+            </p>
+
+            <p>
+                To overcome this problem, we used the imblearn package for undersampling to balance the data set [2].
+                Undersampling is a technique that involves removing some samples from the set with a large number of
+                samples to balance it up with another set. The data set was described by peptide sequences having
+                arginine residue symmetrically surrounded by flanking residues. 80% of the data set was used for
+                training and validation, while the rest 20% data set was placed aside to be used for independent testing
+                of the model. A more detailed description of the data set is depicted in Table 1.
+            </p>
+
+            <p>
+                For each window length, the positive dataset was split randomly into a training set and a test set in a
+                4:1 ratio.
+                We also split the negative dataset into a training and a test set (size of the negative test set equal
+                to the positive test set).
+                For window length 19 onwards, we had a larger proportion of the negative training set with respect to
+                the positive training set.
+                Thus, to overcome the class imbalance issue, we opted for under-sampling and created equal subsets of
+                the negative training set in a 1:1 ratio with the positive training set by random sampling.
+                For computational time-saving, we restricted the size of negative training subsets to 5 for each window
+                length.
+                During the course of our work, we accumulated more instances of arginine methylated proteins from recent
+                studies and separately prepared an independent dataset for final evaluation and comparison.
+            </p>
+            <p>
+                Supplementary Information:<a href="dow.doc" download>Download</a> &nbsp; &nbsp; &nbsp;
+                Datasets:<a href="dataset.zip" download>View</a>
+            </p>
+        </div>
+        <div class="table-section">
+            <h2>Table 1. Description of the arginine methylation data set before and after balancing</h2>
+            <table>
+                <tr>
+                    <th>Data set</th>
+                    <th>Positive samples (before/after)</th>
+                    <th>Negative samples (before/after)</th>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>1925/1925</td>
+                    <td>46651/1925</td>
+                </tr>
+                <tr>
+                    <td>Training Data</td>
+                    <td>1540/1540<br>Training: 1232<br>Validation: 308</td>
+                    <td>37321/1540<br>Training: 1232<br>Validation: 308</td>
+                </tr>
+                <tr>
+                    <td>Testing Data</td>
+                    <td>385/385</td>
+                    <td>9330/385</td>
+                </tr>
+            </table>
+            <h2>References:</h2>
+            <ol>
+                <li>
+                    [1] U. Consortium, “Uniprot: the universal protein knowledgebase in 2023,” Nucleic Acids Research,
+                    vol. 51, no. D1, pp. D523–D531, 2023.
+                </li>
+                <li>
+                    [2] G. Lemaître, F. Nogueira, and C. K. Aridas, “Imbalanced-learn: A python toolbox to tackle the
+                    curse of imbalanced datasets in machine learning,” The Journal of Machine Learning Research, vol.
+                    18, no. 1, pp. 559–563, 2017.
+                </li>
+            </ol>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>National Institute of Technology Srinagar</p>
+            <p>&copy; 2023 NIT Srinagar,J&K India.All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

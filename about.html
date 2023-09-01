@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #f8c947;
+            /* Change to your desired hover color */
+        }
+
+        .burger {
+            display: none;
+        }
+
+        /* Content Styles */
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            width: 98%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Adjustments for smaller screens */
+        @media screen and (max-width: 600px) {
+            .footer-content {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            footer {
+                position: relative;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: #007BFF;
+                position: absolute;
+                top: 65px;
+                left: 0;
+                width: 100%;
+                padding: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                border-radius: 5px;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .nav-links li a {
+                color: #fff;
+                font-size: 18px;
+            }
+
+            .burger {
+                display: block;
+                cursor: pointer;
+            }
+
+            .burger div {
+                width: 25px;
+                height: 3px;
+                background-color: #fff;
+                margin: 5px;
+                transition: all 0.3s ease;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-brand">PRmePRed</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="./templates/index.html">Home</a></li>
+                <li><a href="dataset.html">Dataset</a></li>
+                <li><a href="help.html">Help</a> </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="burger" onclick="toggleNav()">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content">
+        <h1>About Us</h1>
+        <p>
+            DeepPRMS is a deep learning based predictor for the prediction of protein arginine methylation sites.
+            Protein methylation is a vital post-translational modifications process that is responsible for modifying
+            the conformational and functional properties of a protein. Protein methylation is crucial for various
+            cellular processes, including transcription activity, DNA repair, RNA processing, gene regulation, signal
+            transduction, and cell cycle control. The methylation process commonly involves N-methylation of side chains
+            of arginine (R), lysine (K), asparagine, alanine, histidine, and proline amino acid residues. Protein
+            arginine methyltransferases (PRMTs), a protein family which carried out these modifications by using
+            S-adenosylmethionine to transfer a methyl group. PRMTs produce three types of arginine methylation:
+            mono-methylarginine (MMA), asymmetric di-methylarginine (ADMA), and symmetric di-methylarginine (SDMA).
+
+            The DeepPRMS extracts sequential and spatial information from the primary sequences using convolutional
+            neural network (CNN) and gated recurrent units (GRU). GRU is capable of capturing sequential information,
+            while CNN captures spatial data. The latent representations of CNN and GRU models are fused to capture local
+            information patterns and long-distance dependency.
+
+        </p>
+        <p>
+            Supplementary Information:<a href="dow.doc" download>Download</a>
+        </p>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>National Institute of Technology Srinagar</p>
+            <p>&copy; 2023 NIT Srinagar,J&K India.All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="indexabout.js"></script>
+</body>
+
+</html>
