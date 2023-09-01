@@ -20,7 +20,8 @@ model = keras.models.load_model("model1-05-0.7873.hdf5")
 def predict():
     data = request.get_json()
     protein_sequence = data.get('protein_sequence')
-    threshold = float(data.get('threshold'))
+    threshold = data.get('threshold')
+    threshold = float(threshold) if threshold else 0
     enable_threshold = data.get('enableThreshold')
     if not enable_threshold:
         threshold=0

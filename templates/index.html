@@ -54,8 +54,14 @@
             <label for="fastaFile">Select File:</label>
             <input type="file" id="fastaFile" accept=".fasta" onchange="handleFileSelect(event)">
             <label for="thresholdSelect">Select Threshold:</label>
-            <input type="checkbox" id="enableThreshold" onchange="toggleThreshold()">
-            <input type="number" id="thresholdSelect" step="0.01" min="0" max="1" value="0.5" disabled>
+            <input type="checkbox" id="enableThreshold" onchange="toggleThreshold()" checked>
+            <select id="thresholdSelect" style="width: 70px">
+                <option value="0.5">0.5</option>
+                <option value="0.6">0.6</option>
+                <option value="0.7">0.7</option>
+                <option value="0.8">0.8</option>
+                <option value="0.9">0.9</option>
+            </select>
             <button onclick="runPrediction()">Run Prediction</button>
             <button onclick="resetForm()">Reset</button>
             <!-- <p><a href="../tips.html">Tips</a> -->
@@ -104,6 +110,11 @@ MAKTTKVKGNKKEVKASKQAKEEKAKAVSSSSSESSSSSSSSSESESESESESESSSSSSSSDSESSSSSSSDSESEAET
             const proteinSequences = document.getElementById("proteinSequences").value;
             const threshold = document.getElementById("thresholdSelect").value;
             const enableThreshold = document.getElementById("enableThreshold").checked;
+
+            if (!proteinSequences) {
+                alert("Please enter protein sequences");
+                return;
+            }
 
             const data = {
                 protein_sequence: proteinSequences,

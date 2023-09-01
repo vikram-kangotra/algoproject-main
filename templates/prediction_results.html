@@ -16,17 +16,13 @@
 
         .header-container {
             background-color: #f0f0f0;
-            text-align: center;
-            padding: 1rem 0;
+            height: 50px;
+            margin-top: 0;
         }
 
         .header-text {
             font-size: 1.5rem;
             font-weight: bold;
-        }
-
-        .content {
-            padding: 2rem;
         }
 
         h3 {
@@ -199,6 +195,11 @@
         const urlParams = new URLSearchParams(queryString);
         const results = urlParams.get('results');
         const predictionResults = JSON.parse(decodeURIComponent(results));
+
+        if (predictionResults == null) {
+            alert('No results found!');
+            window.location.href = 'index.html';
+        }
 
         const predictionTableBody = document.getElementById('predictionTableBody');
         const downloadButton = document.getElementById('downloadButton');
