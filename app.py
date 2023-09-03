@@ -26,11 +26,12 @@ def predict():
     if not enable_threshold:
         threshold=0
     lines = protein_sequence.split('\n')
-    sequence_id = lines[0][0:]
-    sequence_data = lines[1:]  # Rest of the lines are sequence data
     prediction_results = []
 
-    for line in sequence_data:
+    for i in range(0, len(lines), 2):
+        sequence_id = lines[i]
+        line = lines[i+1]
+
         da = line.strip()  # Remove any leading/trailing whitespace
 
         if "R" not in da:
