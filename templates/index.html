@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeepPRMS</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="static/css/style.css">
     <style>
         .header-container {
-            background-image: url('../internal-banner.jpg');
+            background-image: url('static/images/internal-banner.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center top;
@@ -23,11 +23,11 @@
         <div class="navbar-brand">DeepPRMS
         </div>
         <ul class="nav-links" id="navLinks">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="../about.html">About</a></li>
-            <li><a href="../dataset.html">Dataset</a></li>
-            <li><a href="../help.html">Help</a></li>
-            <li><a href="../contact.html">Contact Us</a></li>
+            <li><a href="\">Home</a></li>
+            <li><a href="\about">About</a></li>
+            <li><a href="\dataset">Dataset</a></li>
+            <li><a href="\help">Help</a></li>
+            <li><a href="\contact">Contact Us</a></li>
         </ul>
         <div class="burger" onclick="toggleNav()">
             <div class="line1"></div>
@@ -72,7 +72,7 @@
             <p>&copy; 2023 NIT Srinagar,J&K India.All rights reserved.</p>
         </div>
     </footer>
-    <script src="../index.js"></script>
+    <script src="static/js/index.js"></script>
     <script>
         function handleFileSelect(event) {
             const file = event.target.files[0];
@@ -124,7 +124,7 @@ MAKTTKVKGNKKEVKASKQAKEEKAKAVSSSSSESSSSSSSSSESESESESESESSSSSSSSDSESSSSSSSDSESEAET
 
             console.log("Data to send:", data);
             // Make an API call to the backend using fetch
-            fetch('http://localhost:5000/predict', {
+            fetch('/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8'
@@ -138,10 +138,8 @@ MAKTTKVKGNKKEVKASKQAKEEKAKAVSSSSSESSSSSSSSSESESESESESESSSSSSSSDSESSSSSSSDSESEAET
                     return response.json();
                 })
                 .then(data => {
-                    console.log("Response Data:", data);
-                    const predictionResults = encodeURIComponent(JSON.stringify(data));
-                    console.log(predictionResults);
-                    window.location.href = `prediction_results.html?results=${predictionResults}`;
+                    localStorage.setItem("predictionResults", JSON.stringify(data));
+                    window.location.href = `/prediction_results`;
                 })
                 .catch(error => {
                     console.error("Error:", error.message);

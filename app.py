@@ -1,18 +1,43 @@
 from keras import backend as K
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from tensorflow import keras
 import sequence_extractionn
 import numpy as np
 import warnings
 import pickle
+
 warnings.filterwarnings("ignore")
 app = Flask(__name__)
 CORS(app)
 
 @app.route('/')
 def home():
-    return "Server is Listening"
+    return render_template('index.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/dataset')
+def dataset():
+    return render_template('dataset.html')
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
+@app.route('/prediction_results')
+def prediction_results():
+    return render_template('prediction_results.html')
+
+@app.route('/tips')
+def tips():
+    return render_template('tips.html')
 
 model = keras.models.load_model("model1-05-0.7873.hdf5")
 
@@ -71,4 +96,4 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
