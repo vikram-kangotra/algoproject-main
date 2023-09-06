@@ -50,7 +50,7 @@ def predict():
     enable_threshold = data.get('enableThreshold')
     if not enable_threshold:
         threshold=0
-    lines = protein_sequence.split('\n')
+    lines = protein_sequence.strip().split('\n')
     prediction_results = []
 
     for i in range(0, len(lines), 2):
